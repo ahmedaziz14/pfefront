@@ -6,8 +6,13 @@ import GetStartedScreen from './screens/GetStartedScreen';
 import LoginScreen from './screens/LoginScreen';
 import SignupScreen from './screens/SignupScreen';
 import AddUserScreen from './screens/AddUserScreen';
-import NotificationsScreen from './screens/notificationscreen';
+import HomeScreen from './screens/HomeScreen';
 import ProfileScreen from './screens/ProfileScreen';
+import NotificationsScreen from './screens/notificationscreen' ; 
+import MapScreen from './screens/MapScreen';
+import ParameterScreen from './screens/ParameterScreen';
+import ChatScreen from './screens/ChatScreen';
+
 const Stack = createStackNavigator();
 
 export default function Navigation() {
@@ -25,8 +30,17 @@ export default function Navigation() {
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Signup" component={SignupScreen} />
         <Stack.Screen name='AddUserScreen' component={AddUserScreen}/>   
-        <Stack.Screen name='NotificationsScreen' component={NotificationsScreen}/>     
-        <Stack.Screen name='ProfileScreen' component={ProfileScreen}/>         
+        <Stack.Screen name='HomeScreen' component={HomeScreen}/>  
+        <Stack.Screen name='ParameterScreen' component={ParameterScreen}/>  
+
+        <Stack.Screen name='ProfileScreen' component={ProfileScreen}/>  
+        <Stack.Screen name='NotificationsScreen' component={NotificationsScreen}/>  
+        <Stack.Screen name='MapScreen' component={MapScreen}/> 
+        <Stack.Screen name='ChatScreen' component={ChatScreen}/> 
+        
+        
+                   
+
       </Stack.Navigator>
     </NavigationContainer>
   );

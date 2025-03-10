@@ -1,70 +1,72 @@
-{
-  "expo": {
-    "newArchEnabled": true,
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ],
-    "name": "DEVfirstproject",
-    "slug": "DEVfirstproject",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
-    "ios": {
-      "supportsTablet": true,
-      "infoPlist": {
-        "NSCameraUsageDescription": "The app needs access to your camera to take photos.",
-        "NSPhotoLibraryUsageDescription": "The app needs access to your photo library to select photos.",
-        "NSPhotoLibraryAddUsageDescription": "The app needs to save photos to your library."
-      }
-    },
-    "android": {
-      "permissions": [
-        "android.permission.CAMERA",
-        "android.permission.READ_EXTERNAL_STORAGE",
-        "android.permission.WRITE_EXTERNAL_STORAGE",
-        "android.permission.READ_MEDIA_IMAGES",
-        "android.permission.READ_MEDIA_VIDEO",
-        "android.permission.RECORD_AUDIO",
-        "android.permission.CAMERA",
-        "android.permission.READ_EXTERNAL_STORAGE",
-        "android.permission.WRITE_EXTERNAL_STORAGE",
-        "android.permission.READ_MEDIA_IMAGES",
-        "android.permission.READ_MEDIA_VIDEO",
-        "android.permission.RECORD_AUDIO"
+  {
+    "expo": {
+      "newArchEnabled": true,
+      "platforms": [
+        "ios",
+        "android",
+        "web"
       ],
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+      "name": "DEVfirstproject",
+      "slug": "DEVfirstproject",
+      "version": "1.0.0",
+      "orientation": "portrait",
+      "icon": "./assets/icon.png",
+      "userInterfaceStyle": "light",
+      "splash": {
+        "image": "./assets/splash.png",
+        "resizeMode": "contain",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.anonymous.DEVfirstproject"
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    },
-    "plugins": [
-      [
-        "expo-image-picker",
-        {
-          "photosPermission": "The app needs access to your photos to let you choose images.",
-          "cameraPermission": "The app needs access to your camera to take photos."
+      "ios": {
+        "supportsTablet": true,
+        "infoPlist": {
+          "NSCameraUsageDescription": "The app needs access to your camera to take photos.",
+          "NSPhotoLibraryUsageDescription": "The app needs access to your photo library to select photos.",
+          "NSPhotoLibraryAddUsageDescription": "The app needs to save photos to your library."
         }
-      ],
-      [
-        "expo-media-library",
-        {
-          "photosPermission": "The app needs access to your photos to save and manage images.",
-          "savePhotosPermission": "The app needs to save photos to your library."
-        }
-      ],
-      "react-native-vision-camera"
-    ]
+      },
+      "android": {
+        "permissions": [
+          "android.permission.CAMERA",
+          "android.permission.READ_EXTERNAL_STORAGE",
+          "android.permission.WRITE_EXTERNAL_STORAGE",
+          "android.permission.READ_MEDIA_IMAGES",
+          "android.permission.READ_MEDIA_VIDEO",
+          "android.permission.RECORD_AUDIO",
+          "android.permission.CAMERA",
+          "android.permission.READ_EXTERNAL_STORAGE",
+          "android.permission.WRITE_EXTERNAL_STORAGE",
+          "android.permission.READ_MEDIA_IMAGES",
+          "android.permission.READ_MEDIA_VIDEO",
+          "android.permission.RECORD_AUDIO" , 
+          "android.permission.ACCESS_FINE_LOCATION",
+      "android.permission.ACCESS_COARSE_LOCATION"
+        ],
+        "adaptiveIcon": {
+          "foregroundImage": "./assets/adaptive-icon.png",
+          "backgroundColor": "#ffffff"
+        },
+        "package": "com.anonymous.DEVfirstproject"
+      },
+      "web": {
+        "favicon": "./assets/favicon.png"
+      },
+      "plugins": [
+        [
+          "expo-image-picker",
+          {
+            "photosPermission": "The app needs access to your photos to let you choose images.",
+            "cameraPermission": "The app needs access to your camera to take photos." 
+          }
+        ],
+        [
+          "expo-media-library",
+          {
+            "photosPermission": "The app needs access to your photos to save and manage images.",
+            "savePhotosPermission": "The app needs to save photos to your library."
+          }
+        ],
+        "react-native-vision-camera"
+      ]
+    }
   }
-}

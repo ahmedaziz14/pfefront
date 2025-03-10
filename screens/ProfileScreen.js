@@ -17,7 +17,7 @@ export default function ProfileScreen({ navigation }) {
   const [loading, setLoading] = useState(false);
   const [deleting, setDeleting] = useState(false);
 
-  // Récupérer les informations du profil
+  // Fetch profile data
   const fetchProfile = async () => {
     setLoading(true);
     try {
@@ -44,7 +44,7 @@ export default function ProfileScreen({ navigation }) {
     }
   };
 
-  // Supprimer le profil
+  // Delete profile
   const deleteProfile = async () => {
     setDeleting(true);
     try {
@@ -61,7 +61,7 @@ export default function ProfileScreen({ navigation }) {
 
       if (response.ok) {
         Alert.alert("Success", "Profile deleted successfully!");
-        
+        setProfile(null); // Clear profile after deletion
       } else {
         Alert.alert("Error", data.error || "Failed to delete profile.");
       }
@@ -72,7 +72,7 @@ export default function ProfileScreen({ navigation }) {
     }
   };
 
-  // Charger les informations du profil au montage du composant
+  // Load profile on mount
   useEffect(() => {
     fetchProfile();
   }, []);
@@ -89,13 +89,33 @@ export default function ProfileScreen({ navigation }) {
     return (
       <View style={styles.loadingContainer}>
         <Text style={styles.noProfileText}>No profile found.</Text>
+        <TouchableOpacity
+          style={[styles.button, styles.updateButton]}
+          onPress={() => navigation.navigate("AddUserScreen")}
+        >
+          <Text style={styles.buttonText}>Create Profile</Text>
+        </TouchableOpacity>
       </View>
     );
   }
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      {/* Animation Lottie */}
+      {/* Profile Picture */}
+      <View style={styles.profilePictureContainer}>
+        {profile.profile_picture ? (
+          <Image
+            source={{ uri: profile.profile_picture }}
+            style={styles.profilePicture}
+          />
+        ) : (
+          <View style={styles.placeholderPicture}>
+            <Text style={styles.placeholderText}>No Photo</Text>
+          </View>
+        )}
+      </View>
+
+      {/* Animation */}
       <LottieView
         source={require("./img/profile-animation.json")}
         autoPlay
@@ -103,31 +123,19 @@ export default function ProfileScreen({ navigation }) {
         style={styles.animation}
       />
 
-      {/* Informations du profil */}
+      {/* Profile Info */}
       <View style={styles.profileInfo}>
         <Text style={styles.label}>Name:</Text>
-        <Text style={styles.value}>{profile.name}</Text>
+        <Text style={styles.value}>{profile.name || "Not set"}</Text>
 
         <Text style={styles.label}>Interest:</Text>
-        <Text style={styles.value}>{profile.interest}</Text>
+        <Text style={styles.value}>{profile.interest || "Not set"}</Text>
 
         <Text style={styles.label}>More Info:</Text>
-        <Text style={styles.value}>{profile.more_info}</Text>
-
-        {/* Afficher les images */}
-        {profile.image_urls && profile.image_urls.length > 0 && (
-          <>
-            <Text style={styles.label}>Photos:</Text>
-            <ScrollView horizontal contentContainerStyle={styles.imagesContainer}>
-              {profile.image_urls.map((url, index) => (
-                <Image key={index} source={{ uri: url }} style={styles.image} />
-              ))}
-            </ScrollView>
-          </>
-        )}
+        <Text style={styles.value}>{profile.more_info || "Not set"}</Text>
       </View>
 
-      {/* Boutons pour mettre à jour et supprimer le profil */}
+      {/* Buttons */}
       <View style={styles.buttonsContainer}>
         <TouchableOpacity
           style={[styles.button, styles.updateButton]}
@@ -157,6 +165,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     backgroundColor: "#f5f5f5",
     padding: 20,
+    alignItems: "center",
   },
   loadingContainer: {
     flex: 1,
@@ -166,17 +175,43 @@ const styles = StyleSheet.create({
   noProfileText: {
     fontSize: 18,
     color: "#666",
+    marginBottom: 20,
   },
-  animation: {
+  profilePictureContainer: {
+    marginTop: 20,
+    marginBottom: 20,
+  },
+  profilePicture: {
     width: 150,
     height: 150,
-    alignSelf: "center",
-    marginBottom: 20,
+    borderRadius: 75, // Half of width/height for circle
+    borderWidth: 3,
+    borderColor: "#4caf50",
+  },
+  placeholderPicture: {
+    width: 150,
+    height: 150,
+    borderRadius: 75,
+    backgroundColor: "#ddd",
+    justifyContent: "center",
+    alignItems: "center",
+    borderWidth: 3,
+    borderColor: "#ccc",
+  },
+  placeholderText: {
+    color: "#666",
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  animation: {
+    width: 120,
+    height: 120,
   },
   profileInfo: {
     backgroundColor: "#fff",
     borderRadius: 12,
     padding: 20,
+    width: "100%",
     elevation: 3,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
@@ -194,24 +229,15 @@ const styles = StyleSheet.create({
     color: "#666",
     marginBottom: 10,
   },
-  imagesContainer: {
-    flexDirection: "row",
-    marginTop: 10,
-  },
-  image: {
-    width: 100,
-    height: 100,
-    borderRadius: 8,
-    marginRight: 10,
-  },
   buttonsContainer: {
     marginTop: 20,
+    width: "100%",
   },
   button: {
     padding: 15,
-    borderRadius: 8,
+    borderRadius: 25,
     alignItems: "center",
-    marginBottom: 10,
+    marginBottom: 15,
   },
   updateButton: {
     backgroundColor: "#4caf50",

@@ -41,7 +41,7 @@ export default function LoginScreen({ navigation }) {
       if (response.ok) {
         await AsyncStorage.setItem('token', data.token); // Stocker le JWT
         Alert.alert('Succès', 'Connexion réussie !');
-        navigation.navigate('AddUserScreen'); // Naviguer vers l'écran de profil après la connexion
+        navigation.navigate('HomeScreen'); // Naviguer vers l'écran de profil après la connexion
       } else {
         Alert.alert('Erreur', data.error || 'Problème de connexion.');
       }
