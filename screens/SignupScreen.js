@@ -1,62 +1,136 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  Alert,
+} from "react-native";
+import LottieView from "lottie-react-native";
 
-export default function SignupScreen() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [productKey, setProductKey] = useState('');
+export default function SignupScreen({ navigation }) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState(""); // New state for password confirmation
+  const [productKey, setProductKey] = useState("");
+  const [loading, setLoading] = useState(false); // Added loading state
+
+  const isValidEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
 
   const handleSignup = async () => {
+    // Validation checks
+    if (!email || !password || !confirmPassword || !productKey) {
+      Alert.alert("Erreur", "Veuillez remplir tous les champs.");
+      return;
+    }
+
+    if (!isValidEmail(email)) {
+      Alert.alert("Erreur", "Veuillez entrer une adresse email valide.");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      Alert.alert("Erreur", "Les mots de passe ne correspondent pas.");
+      return;
+    }
+
+    setLoading(true);
+
     try {
-      const response = await fetch('http://192.168.1.10:3000/auth/signup', {  // Ensure the URL is correctly formatted
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const response = await fetch("http://192.168.1.7:3000/auth/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password, product_key: productKey }),
       });
 
       const data = await response.json();
+      setLoading(false);
+
       if (response.ok) {
-        Alert.alert('Success', 'Account created successfully!');
+        Alert.alert("Succès", "Compte créé avec succès !");
+        navigation.navigate("LoginScreen"); // Navigate to Login after signup
       } else {
-        Alert.alert('Error', data.error || 'Signup failed');
+        Alert.alert("Erreur", data.error || "Échec de l'inscription");
       }
     } catch (error) {
-      Alert.alert('Error', 'Network error');
+      setLoading(false);
+      Alert.alert("Erreur", "Erreur réseau");
     }
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Sign Up</Text>
-      
-      <TextInput 
-        style={styles.input} 
-        placeholder="Email" 
-        placeholderTextColor="#aaa" 
-        value={email} 
-        onChangeText={setEmail} 
+      {/* Lottie Space Background */}
+      <LottieView
+        source={require("./img/spacex.json")} // Replace with your space Lottie file
+        autoPlay
+        loop
+        style={styles.background}
       />
-      
-      <TextInput 
-        style={styles.input} 
-        placeholder="Password" 
-        placeholderTextColor="#aaa" 
-        secureTextEntry 
-        value={password} 
-        onChangeText={setPassword} 
-      />
+      {/* Content Overlay */}
+      <View style={styles.content}>
+        <Text style={styles.title}>Sign Up</Text>
 
-      <TextInput 
-        style={styles.input} 
-        placeholder="Product Key" 
-        placeholderTextColor="#aaa" 
-        value={productKey} 
-        onChangeText={setProductKey} 
-      />
+        <TextInput
+          style={[styles.input, email && styles.activeInput]}
+          placeholder="Email"
+          placeholderTextColor="#aaa"
+          value={email}
+          onChangeText={setEmail}
+        />
 
-      <TouchableOpacity style={styles.button} onPress={handleSignup}>
-        <Text style={styles.buttonText}>Create Account</Text>
-      </TouchableOpacity>
+        <TextInput
+          style={[styles.input, password && styles.activeInput]}
+          placeholder="Password"
+          placeholderTextColor="#aaa"
+          secureTextEntry
+          value={password}
+          onChangeText={setPassword}
+        />
+
+        <TextInput
+          style={[styles.input, confirmPassword && styles.activeInput]}
+          placeholder="Confirm Password"
+          placeholderTextColor="#aaa"
+          secureTextEntry
+          value={confirmPassword}
+          onChangeText={setConfirmPassword}
+        />
+
+        <TextInput
+          style={[styles.input, productKey && styles.activeInput]}
+          placeholder="Product Key"
+          placeholderTextColor="#aaa"
+          value={productKey}
+          onChangeText={setProductKey}
+        />
+
+        <TouchableOpacity
+          style={[
+            styles.button,
+            email && password && confirmPassword && productKey && isValidEmail(email)
+              ? styles.activeButton
+              : { opacity: 0.6 },
+          ]}
+          onPress={handleSignup}
+          disabled={loading || !email || !password || !confirmPassword || !productKey || !isValidEmail(email)}
+        >
+          <Text style={styles.buttonText}>
+            {loading ? "Loading..." : "Create Account"}
+          </Text>
+        </TouchableOpacity>
+
+        <Text
+          style={styles.link}
+          onPress={() => navigation.navigate("LoginScreen")}
+        >
+          Already have an account? Sign In
+        </Text>
+      </View>
     </View>
   );
 }
@@ -64,35 +138,62 @@ export default function SignupScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#0f0c29',
+    backgroundColor: "#0f0c29", // Fallback background
+  },
+  background: {
+    position: "absolute",
+    width: "100%",
+    height: "100%",
+    zIndex: 0, // Behind content
+  },
+  content: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    zIndex: 1, // Above background
   },
   title: {
     fontSize: 28,
-    color: '#fff',
+    color: "#fff",
     marginBottom: 20,
   },
   input: {
-    width: '80%',
-    backgroundColor: '#1c1c3c',
+    width: "80%",
+    backgroundColor: "rgba(28, 28, 60, 0.9)", // Slightly transparent for depth
     borderRadius: 8,
     padding: 15,
-    color: '#fff',
+    color: "#fff",
     marginVertical: 10,
     fontSize: 16,
+  },
+  activeInput: {
+    borderColor: "#FF6F61",
+    borderWidth: 1,
   },
   button: {
-    width: '80%',
-    backgroundColor: '#FF6F61',
+    width: "80%",
+    backgroundColor: "#444", // Default inactive state
     padding: 15,
     borderRadius: 8,
     marginVertical: 10,
-    alignItems: 'center',
+    alignItems: "center",
+    elevation: 5,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+  },
+  activeButton: {
+    backgroundColor: "#FF6F61", // Active state
   },
   buttonText: {
-    color: '#fff',
+    color: "#fff",
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: "bold",
+  },
+  link: {
+    color: "#FF6F61",
+    marginTop: 10,
+    textDecorationLine: "underline",
   },
 });

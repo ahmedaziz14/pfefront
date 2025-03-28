@@ -41,7 +41,7 @@ const MapScreen = () => {
     }
     setLoading(true);
     try {
-      const response = await fetch("http://192.168.1.10:3000/locations", {
+      const response = await fetch("http://192.168.1.3:3000/locations", {
         method: "GET",
         headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
       });
@@ -64,7 +64,7 @@ const MapScreen = () => {
   useEffect(() => {
     if (token && userId) {
       fetchLocations();
-      const socket = io("http://192.168.1.10:3000");
+      const socket = io("http://192.168.1.3:3000");
       socket.on("connect", () => {
         console.log("✅ Connecté au WebSocket");
         socket.emit("join", userId);

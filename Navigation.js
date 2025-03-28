@@ -12,6 +12,7 @@ import NotificationsScreen from './screens/notificationscreen' ;
 import MapScreen from './screens/MapScreen';
 import ParameterScreen from './screens/ParameterScreen';
 import ChatScreen from './screens/ChatScreen';
+import geminiScreen from './screens/geminiScreen' ; 
 
 const Stack = createStackNavigator();
 
@@ -37,6 +38,7 @@ export default function Navigation() {
         <Stack.Screen name='NotificationsScreen' component={NotificationsScreen}/>  
         <Stack.Screen name='MapScreen' component={MapScreen}/> 
         <Stack.Screen name='ChatScreen' component={ChatScreen}/> 
+        <Stack.Screen name='geminiScreen' component={geminiScreen}/> 
         
         
                    
