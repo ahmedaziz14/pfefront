@@ -73,7 +73,7 @@ const NotificationsScreen = () => {
     if (!token) return;
     setLoading(true);
     try {
-      const response = await fetch("http://192.168.1.3:3000/notifications", {
+      const response = await fetch("http://192.168.1.8:3000/notifications", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -98,7 +98,7 @@ const NotificationsScreen = () => {
     if (!token) return;
     try {
       const response = await fetch(
-        `http://192.168.1.3:3000/notifications/${notificationId}/read`,
+        `http://192.168.1.8:3000/notifications/${notificationId}/read`,
         {
           method: "PUT",
           headers: {
@@ -123,7 +123,7 @@ const NotificationsScreen = () => {
     if (!token) return;
     try {
       const response = await fetch(
-        `http://192.168.1.3:3000/notifications/${notificationId}`,
+        `http://192.168.1.8:3000/notifications/${notificationId}`,
         {
           method: "DELETE",
           headers: {
@@ -145,7 +145,7 @@ const NotificationsScreen = () => {
   useEffect(() => {
     if (token && userId) {
       fetchNotifications();
-      const socket = io("http://192.168.1.3:3000", {
+      const socket = io("http://192.168.1.8:3000", {
         auth: { token: token },
       });
 
@@ -184,7 +184,7 @@ const NotificationsScreen = () => {
     <View style={styles.container}>
       {/* Lottie Background */}
       <LottieView
-        source={require("./img/spacex.json")} // Replace with your Lottie file
+        source={require("./img/spacex.json")} 
         autoPlay
         loop
         style={styles.background}
@@ -250,22 +250,21 @@ const NotificationsScreen = () => {
     </View>
   );
 };
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#000", // Black background as fallback
+    backgroundColor: "#0d1117", // Couleur de fond sombre
   },
   background: {
     position: "absolute",
     width: "100%",
     height: "100%",
-    zIndex: 0, // Behind content
+    zIndex: 0,
   },
   content: {
     flex: 1,
     padding: 20,
-    zIndex: 1, // Above background
+    zIndex: 1,
   },
   header: {
     flexDirection: "row",
@@ -274,60 +273,72 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   title: {
-    fontSize: 24,
+    fontSize: 28,
     fontWeight: "bold",
-    color: "#fff", // White for contrast
+    color: "#ffffff",
   },
   reloadButton: {
-    backgroundColor: "#4CAF50",
-    paddingVertical: 8,
-    paddingHorizontal: 15,
-    borderRadius: 5,
+    backgroundColor: "#1f6feb",
+    paddingVertical: 10,
+    paddingHorizontal: 18,
+    borderRadius: 12,
+    shadowColor: "#1f6feb",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.4,
+    shadowRadius: 4,
+    elevation: 5,
   },
   reloadButtonDisabled: {
-    backgroundColor: "#a5d6a7",
+    backgroundColor: "#567edc",
   },
   reloadText: {
     color: "#fff",
     fontSize: 16,
-    fontWeight: "bold",
+    fontWeight: "600",
   },
   notificationItem: {
-    backgroundColor: "rgba(255, 255, 255, 0.9)", // Semi-transparent white
+    backgroundColor: "#161b22",
     padding: 15,
-    marginBottom: 10,
-    borderRadius: 8,
-    elevation: 2,
+    marginBottom: 15,
+    borderRadius: 16,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
+    elevation: 5,
   },
   unread: {
     borderLeftWidth: 4,
-    borderLeftColor: "#2196F3",
+    borderLeftColor: "#58a6ff",
   },
   read: {
     borderLeftWidth: 4,
-    borderLeftColor: "#ccc",
+    borderLeftColor: "#30363d",
   },
   notificationText: {
-    color: "#333", // Dark text for readability
+    color: "#c9d1d9",
     fontSize: 16,
+    fontWeight: "500",
   },
   actions: {
     flexDirection: "row",
-    marginTop: 10,
+    marginTop: 12,
     justifyContent: "flex-end",
   },
   button: {
-    backgroundColor: "#4CAF50",
-    padding: 8,
-    borderRadius: 5,
-    marginRight: 10,
+    backgroundColor: "#238636",
+    paddingVertical: 8,
+    paddingHorizontal: 14,
+    borderRadius: 10,
+    marginLeft: 8,
   },
   deleteButton: {
-    backgroundColor: "#E53935",
+    backgroundColor: "#da3633",
   },
   buttonText: {
     color: "#fff",
     fontSize: 14,
+    fontWeight: "600",
   },
   emptyContainer: {
     flex: 1,
@@ -336,7 +347,7 @@ const styles = StyleSheet.create({
   },
   emptyText: {
     fontSize: 18,
-    color: "#fff", // White for contrast
+    color: "#8b949e",
   },
 });
 

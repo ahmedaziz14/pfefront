@@ -51,12 +51,20 @@ const HomeScreen = () => {
           <LottieView source={require("./img/chat.json")} autoPlay loop style={styles.lottie} />
           <Text style={styles.buttonText}>Help!</Text>
         </TouchableOpacity>
+         {/* gemini  */}
+         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("geminiScreen")}>
+          <LottieView source={require("./img/gemini.json")} autoPlay loop style={styles.lottie} />
+          <Text style={styles.buttonText}>Chat with Gemini </Text>
+        </TouchableOpacity>
 
         {/* Bouton Logout */}
         <TouchableOpacity style={styles.button} onPress={handleLogout}>
           <LottieView source={require("./img/logout.json")} autoPlay loop style={styles.lottie} />
           <Text style={styles.buttonText}>Déconnexion</Text>
         </TouchableOpacity>
+
+       
+        
       </ScrollView>
     </View>
   );

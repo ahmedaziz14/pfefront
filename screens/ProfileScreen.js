@@ -23,7 +23,7 @@ export default function ProfileScreen({ navigation }) {
     try {
       const token = await AsyncStorage.getItem("token");
 
-      const response = await fetch("http://192.168.1.3:3000/user/profile", {
+      const response = await fetch("http://192.168.1.8:3000/user/profile", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -50,7 +50,7 @@ export default function ProfileScreen({ navigation }) {
     try {
       const token = await AsyncStorage.getItem("token");
 
-      const response = await fetch("http://192.168.1.3:3000/user/profile", {
+      const response = await fetch("http://192.168.1.8:3000/user/profile", {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -103,7 +103,7 @@ export default function ProfileScreen({ navigation }) {
     <View style={styles.container}>
       {/* Background animé */}
       <LottieView
-        source={require("./img/spacex.json")} // 🔹 Remplace par ton fichier Lottie
+        source={require("./img/spacex.json")} 
         autoPlay
         loop
         style={styles.backgroundAnimation}

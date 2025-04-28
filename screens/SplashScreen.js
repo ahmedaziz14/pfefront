@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#0f0c29', // Dark background for modern feel
+    backgroundColor: '#000000', // Dark background for modern feel
   },
   animation: {
     width: 300,

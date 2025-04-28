@@ -136,7 +136,7 @@ export default function AddUserScreen({ navigation }) {
         });
       });
 
-      const response = await fetch("http://192.168.1.3:3000/user/profile", {
+      const response = await fetch("http://192.168.1.8:3000/user/profile", {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -269,7 +269,7 @@ export default function AddUserScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#0f0c29", // Fallback background
+    backgroundColor: "#000000", // Fallback background
   },
   background: {
     position: "absolute",

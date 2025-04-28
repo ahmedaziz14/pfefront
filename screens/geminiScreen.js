@@ -26,7 +26,7 @@ export default function GeminiScreen({ navigation }) {
     setLoading(true);
     try {
       const token = await AsyncStorage.getItem("token");
-      const response = await fetch("http://192.168.1.3:3000/gemini/geminchat", {
+      const response = await fetch("http://192.168.1.8:3000/gemini/geminchat", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,

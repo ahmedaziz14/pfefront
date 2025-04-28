@@ -45,7 +45,7 @@ export default function ChatScreen() {
 
     console.log('ChatScreen token:', token);
 
-    const newSocket = io('http://192.168.1.7:3000', {
+    const newSocket = io('http://192.168.1.8:3000', {
       auth: { token },
     });
 
@@ -68,7 +68,7 @@ export default function ChatScreen() {
       setLoading(true);
       try {
         console.log('Fetching chat history...');
-        const response = await fetch('http://192.168.1.3:3000/chat/history', {
+        const response = await fetch('http://192.168.1.8:3000/chat/history', {
           headers: { Authorization: `Bearer ${token}` },
         });
         const data = await response.json();
@@ -95,7 +95,7 @@ export default function ChatScreen() {
     if (!newMessage.trim()) return;
     try {
       console.log('Sending message...');
-      const response = await fetch('http://192.168.1.3:3000/chat/send', {
+      const response = await fetch('http://192.168.1.8:3000/chat/send', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

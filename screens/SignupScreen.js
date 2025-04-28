@@ -41,7 +41,7 @@ export default function SignupScreen({ navigation }) {
     setLoading(true);
 
     try {
-      const response = await fetch("http://192.168.1.7:3000/auth/signup", {
+      const response = await fetch("http://192.168.1.7:3000/Test/Tsignup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password, product_key: productKey }),
@@ -52,7 +52,7 @@ export default function SignupScreen({ navigation }) {
 
       if (response.ok) {
         Alert.alert("Succès", "Compte créé avec succès !");
-        navigation.navigate("LoginScreen"); // Navigate to Login after signup
+        navigation.navigate("Login"); // Navigate to Login after signup
       } else {
         Alert.alert("Erreur", data.error || "Échec de l'inscription");
       }
@@ -66,13 +66,19 @@ export default function SignupScreen({ navigation }) {
     <View style={styles.container}>
       {/* Lottie Space Background */}
       <LottieView
-        source={require("./img/spacex.json")} // Replace with your space Lottie file
+        source={require("./img/spacex.json")} 
         autoPlay
         loop
         style={styles.background}
       />
       {/* Content Overlay */}
       <View style={styles.content}>
+        <LottieView
+                  source={require("./img/login-car.json")}
+                  autoPlay
+                  loop
+                  style={styles.lottie}
+                />
         <Text style={styles.title}>Sign Up</Text>
 
         <TextInput
@@ -126,7 +132,7 @@ export default function SignupScreen({ navigation }) {
 
         <Text
           style={styles.link}
-          onPress={() => navigation.navigate("LoginScreen")}
+          onPress={() => navigation.navigate("Login")}
         >
           Already have an account? Sign In
         </Text>
@@ -138,19 +144,25 @@ export default function SignupScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#0f0c29", // Fallback background
+    backgroundColor: "#000000", 
   },
   background: {
     position: "absolute",
     width: "100%",
     height: "100%",
-    zIndex: 0, // Behind content
+    zIndex: 0,
+  
+  },
+  lottie: {
+    width: 200,
+    height: 200,
+    marginBottom: 20,
   },
   content: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    zIndex: 1, // Above background
+    zIndex: 1, 
   },
   title: {
     fontSize: 28,
@@ -159,7 +171,7 @@ const styles = StyleSheet.create({
   },
   input: {
     width: "80%",
-    backgroundColor: "rgba(28, 28, 60, 0.9)", // Slightly transparent for depth
+    backgroundColor: "rgba(28, 28, 60, 0.9)", 
     borderRadius: 8,
     padding: 15,
     color: "#fff",
@@ -172,7 +184,7 @@ const styles = StyleSheet.create({
   },
   button: {
     width: "80%",
-    backgroundColor: "#444", // Default inactive state
+    backgroundColor: "#444", 
     padding: 15,
     borderRadius: 8,
     marginVertical: 10,
@@ -184,7 +196,7 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
   },
   activeButton: {
-    backgroundColor: "#FF6F61", // Active state
+    backgroundColor: "#FF6F61",
   },
   buttonText: {
     color: "#fff",

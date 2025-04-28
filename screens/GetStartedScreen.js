@@ -20,7 +20,7 @@ export default function GetStartedScreen({ navigation }) {
         loop
         style={styles.lottie}
       />
-      <Text style={styles.title}>Welcome to CarApp</Text>
+      <Text style={styles.title}>Welcome to Niotoshieled</Text>
       <Text style={styles.subtitle}>
         Unlock the future with your car in one tap.
       </Text>

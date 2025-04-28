@@ -34,7 +34,7 @@ export default function LoginScreen({ navigation }) {
     setLoading(true);
 
     try {
-      const response = await fetch("http://192.168.1.3:3000/auth/login", {
+      const response = await fetch("http://192.168.1.8:3000/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -119,7 +119,7 @@ export default function LoginScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#0f0c29", // Fallback background
+    backgroundColor: "#000000", // Fallback background
   },
   background: {
     position: "absolute",
